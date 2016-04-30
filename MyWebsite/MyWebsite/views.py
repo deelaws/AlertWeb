@@ -6,10 +6,6 @@ from datetime import datetime
 from flask import render_template
 from MyWebsite import app
 
-def function():
-	print('afadsfd')
-
-
 @app.route('/')
 @app.route('/home')
 def home():
