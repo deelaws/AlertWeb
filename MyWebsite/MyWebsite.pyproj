@@ -30,7 +30,40 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyWebsite\adventure_type.py">
+    <Compile Include="MyWebsite\migrate.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_auth\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\adventure_type.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_auth\controllers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_auth\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_auth\models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\constants.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\controllers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\forms.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\models.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MyWebsite\mod_rescue\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="runserver.py" />
@@ -39,13 +72,19 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MyWebsite\" />
+    <Folder Include="MyWebsite\mod_auth\" />
+    <Folder Include="MyWebsite\mod_rescue\" />
     <Folder Include="MyWebsite\static\" />
     <Folder Include="MyWebsite\static\content\" />
     <Folder Include="MyWebsite\static\fonts\" />
     <Folder Include="MyWebsite\static\scripts\" />
     <Folder Include="MyWebsite\templates\" />
+    <Folder Include="MyWebsite\templates\auth\" />
+    <Folder Include="MyWebsite\templates\rescue\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MyWebsite\templates\rescue\create_alert.html" />
+    <Content Include="MyWebsite\templates\rescue\_formhelper.html" />
     <Content Include="requirements.txt" />
     <Content Include="MyWebsite\static\content\bootstrap.css" />
     <Content Include="MyWebsite\static\content\bootstrap.min.css" />

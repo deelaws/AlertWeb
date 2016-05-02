@@ -1,0 +1,20 @@
+﻿{% from "rescue/_formhelper.html" import render_field %}
+{% extends "layout.html" %}
+{% block content %}
+
+<form method=post action="/rescue/create">
+    <dl>
+        {{ render_field(form.adventure_name) }}
+        {{ render_field(form.adventure_type) }}
+        {{ form.adventure_start_time(class='datepicker') }}
+        {{ form.adventure_end_time(class='datepicker') }}
+    </dl>
+    <p><input type=submit value=CreateAlert>
+</form>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+{% endblock %}
