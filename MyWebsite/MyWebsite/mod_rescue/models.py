@@ -16,13 +16,13 @@ class RescueAlert(Base):
     adventure_name = db.Column(db.String(adventure_name_max_length), nullable=False)
 
     # Type of adventure being undertaken  ._member_names_, name='adventure_type'
-    adventure_type = db.Column(db.Integer, unique=True, nullable=False)
+    adventure_type = db.Column(db.Integer, unique=False, nullable=False)
     
     # adventure start time
-    adventure_start_time = db.Column(db.DateTime, unique=True, nullable=True)
+    adventure_start_time = db.Column(db.DateTime, unique=False, nullable=True)
 
     # Adventure end time. at this time, the alert will be kicked off
-    adventure_end_time = db.Column(db.DateTime, unique=True, nullable=True)
+    adventure_end_time = db.Column(db.DateTime, unique=False, nullable=True)
     
     # If alert is active then a notification will be delivered to rescuers if
     # adventurer doesn't deactivate the alert before adventure_end_time
