@@ -1,0 +1,18 @@
+﻿{% from "_formhelper.html" import render_field %}
+{% extends "layout.html" %}
+{% block content %}
+
+<form method=post action="/auth/login">
+    <dl>
+        {{ render_field(form.user_name) }}
+        {{ render_field(form.password) }}
+    </dl>
+    <p><input type=submit value=Login!>
+</form>
+
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+{% endblock %}
