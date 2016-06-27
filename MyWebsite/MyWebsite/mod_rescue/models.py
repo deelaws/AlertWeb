@@ -13,6 +13,8 @@ class RescueAlert(Base):
 
     #__tablename = 'RescueAlert'
 
+    id            = db.Column(db.Integer,   primary_key=True)
+
     adventure_name = db.Column(db.String(adventure_name_max_length), nullable=False)
 
     # Type of adventure being undertaken  ._member_names_, name='adventure_type'
