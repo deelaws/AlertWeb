@@ -5,13 +5,13 @@ Routes and views for the flask application.
 from datetime import datetime
 from flask import render_template
 from MyWebsite import app
+from flask_login import login_required
+from MyWebsite.mod_auth.models import User
 
 @app.route('/')
 @app.route('/home')
 def home():
     """Renders the home page."""
-    #ab = 1, 2
-    #print("a={0},b={1}".format(a, b))
     return render_template(
         'index.html',
         title='Home Page',
@@ -39,3 +39,10 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+@app.route('/profile')
+@login_required
+def profile_main():
+    user_name = session['user_id']
+    user = User.query.filter_by(email=user_name).first()
+    return render_template('profile/main.html', user=user)

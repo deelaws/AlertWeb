@@ -1,0 +1,17 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+
+<div>Welcome {{ user.email }}</div>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                 <div> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+{% endblock %}

@@ -8,7 +8,6 @@ from MyWebsite.mod_profile.constants import *
 User model
 '''
 class User(Base):
-
     __tablename__ = 'user'
 
     '''
@@ -39,6 +38,7 @@ class User(Base):
 
     def check_password(self, password):
         """ Check's whether the specified password is correct """
+        print("checking password")
         return check_password_hash(self.password, password)
 
     def is_admin(self):

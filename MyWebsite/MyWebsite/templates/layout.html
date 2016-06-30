@@ -26,6 +26,11 @@
                     <li><a href="{{ url_for('about') }}">About</a></li>
                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
                     <li><a href="{{ url_for('rescue_alert.create_rescue_alert') }}">Create Alert</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('auth.logout') }}">Logout </a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    {% endif%}
                 </ul>
             </div>
         </div>

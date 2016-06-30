@@ -1,0 +1,2 @@
+user_name_max_length=50
+password_max_length=35
