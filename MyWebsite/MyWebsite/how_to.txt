@@ -1,0 +1,17 @@
+
+# How to run db.create_all()
+
+C:\Users\washahid\Documents\Visual Studio 2015\Projects\MyWebsite\MyWebsite>pyth
+on
+Python 3.4.3 (v3.4.3:9b73f1c3e601, Feb 24 2015, 22:43:06) [MSC v.1600 32 bit (In
+tel)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from MyWebsite import db
+Map([<Rule '/rescue/create' (HEAD, GET, OPTIONS, POST) -> rescue_alert.create_re
+scue_alert>,
+ <Rule '/auth/login' (HEAD, GET, OPTIONS, POST) -> auth.login>,
+ <Rule '/static/<filename>' (HEAD, GET, OPTIONS) -> static>])
+>>> db.create_all()
+>>> quit()
+
+C:\Users\washahid\Documents\Visual Studio 2015\Projects\MyWebsite\MyWebsite>
