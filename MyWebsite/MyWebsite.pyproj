@@ -104,6 +104,7 @@
     <Content Include="MyWebsite\templates\auth\signup.html" />
     <Content Include="MyWebsite\templates\profile\main.html" />
     <Content Include="MyWebsite\templates\rescue\create_alert.html" />
+    <Content Include="MyWebsite\templates\rescue\list_alerts.html" />
     <Content Include="MyWebsite\templates\_formhelper.html" />
     <Content Include="requirements.txt" />
     <Content Include="MyWebsite\static\content\bootstrap.css" />

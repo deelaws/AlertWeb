@@ -1,0 +1,25 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div> {{ message }} </div>
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+
+<div>These are your alerts {{ user.email }}</div>
+
+
+{% for alert in alerts %}
+    <div> {{ alert.adventure_name }}   starting on: {{ alert.adventure_start_time}} </div>
+{% endfor %}
+
+    
+<address>
+    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+</address>
+
+{% endblock %}
