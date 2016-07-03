@@ -3,15 +3,24 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template
+from flask import render_template, g, session
 from MyWebsite import app
 from flask_login import login_required
 from MyWebsite.mod_auth.models import User
+
+@app.before_request
+def add_user_to_g():
+    if session.get("user_id"):
+        user_obj = User.query.filter_by(email=session["user_id"]).first()
+    else:
+        user_obj = None #{"name": "Guest"}  # Make it better, use an anonymous User instead
+    g.user = user_obj
 
 @app.route('/')
 @app.route('/home')
 def home():
     """Renders the home page."""
+    print("home function*******")
     return render_template(
         'index.html',
         title='Home Page',
@@ -31,6 +40,7 @@ def contact():
     )
 
 @app.route('/about')
+@login_required
 def about():
     """Renders the about page."""
     return render_template(
@@ -43,6 +53,4 @@ def about():
 @app.route('/profile')
 @login_required
 def profile_main():
-    user_name = session['user_id']
-    user = User.query.filter_by(email=user_name).first()
-    return render_template('profile/main.html', user=user)
+    return render_template('profile/main.html', user=g.user)

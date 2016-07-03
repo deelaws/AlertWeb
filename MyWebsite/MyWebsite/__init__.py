@@ -25,7 +25,8 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_message = 'Successful login'
-login_manager.login_view = None
+login_manager.login_view = 'auth.login'
+login_manager.login_message = 'Please log in #todo localization'
 
 from MyWebsite.mod_rescue.controllers import mod_resc_alert
 from MyWebsite.mod_auth.controllers import mod_auth
