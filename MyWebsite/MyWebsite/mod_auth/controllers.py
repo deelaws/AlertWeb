@@ -13,6 +13,7 @@ given an id.
 '''
 @login_manager.user_loader
 def load_user(user_id):
+    print("Load_user*******")
     print(user_id)
     return User.query.filter_by(email=user_id).first()
 
@@ -23,14 +24,16 @@ def load_request(request):
     return None
     '''
 
-
+'''
+LOGIN VIEW
+'''
 @mod_auth.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm(request.form)
     if request.method == 'POST' and login_form.validate():
         user = User.query.filter_by(email=login_form.user_name.data).first()
         if user is None:
-            login_form.user_name.errors('Invalid Username or password') 
+            login_form.user_name.errors.append('Invalid Username or password') 
         else:
             # log the user *in* :)
             print(user.email)
@@ -38,7 +41,7 @@ def login():
             if not user.check_password(login_form.password.data):
                 # Incorrect password :(
                 # TODO: FIXME: implement brute force protection a.k.a  rate limiting
-                login_form.password.errors('Invalid Username or password')
+                login_form.password.errors.append('Invalid Username or password')
             else:
                 # Yay! User information is correct
                 flash('Logged in successfully.')
@@ -46,12 +49,18 @@ def login():
                 return load_main_page(user)
     return render_template('auth/login.html', form=login_form)
 
+'''
+LOGOUT VIEW
+'''
 @mod_auth.route('/logout', methods=['GET', 'POST'])
 def logout():
     flash('Logged out successfully.')
     logout_user()
     return redirect(url_for('home')) 
 
+'''
+SIGNUP VIEW
+'''
 @mod_auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = SignupForm(request.form)

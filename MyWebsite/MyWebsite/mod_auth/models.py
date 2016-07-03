@@ -24,6 +24,12 @@ class User(Base):
 
     admin = db.Column(db.Boolean, default=False)
 
+    first_name = db.Column(db.String(user_name_max_length),  nullable=True)
+    last_name = db.Column(db.String(user_name_max_length),  nullable=True)
+
+    # One to many relationship with RescueAlert
+    rescue_alerts = db.relationship('RescueAlert', backref="user", cascade="all, delete-orphan", lazy='dynamic')
+
     def __init__(self, username, password):
         """Constructor"""
         self.email = username

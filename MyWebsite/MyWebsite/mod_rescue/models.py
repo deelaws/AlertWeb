@@ -3,15 +3,16 @@ from MyWebsite import db
 from MyWebsite.models import Base
 from MyWebsite.mod_rescue.adventure_type import AdventureType
 from MyWebsite.mod_rescue.constants import *
+from MyWebsite.mod_profile.constants import *
 from datetime import datetime
-
+from MyWebsite.mod_auth.models import User
 
 """
 Represents a new rescue alert
 """
 class RescueAlert(Base):
 
-    #__tablename = 'RescueAlert'
+    __tablename__ = 'rescue_alert'
 
     id            = db.Column(db.Integer,   primary_key=True)
 
@@ -29,6 +30,14 @@ class RescueAlert(Base):
     # If alert is active then a notification will be delivered to rescuers if
     # adventurer doesn't deactivate the alert before adventure_end_time
     alert_active = db.Column(db.Boolean, unique=False, default=False)
+
+    # Each Rescue is associate with a USER.
+    user_email = db.Column(db.String(user_name_max_length), db.ForeignKey('user.email'))
+
+    '''
+    If public then, anyone can view the rescue alert
+    '''
+    # admin = db.Column(db.Boolean, default=False)
 
     # TODO: Rescuers
 
