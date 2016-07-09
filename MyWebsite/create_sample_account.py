@@ -3,16 +3,24 @@ from sqlalchemy.orm import sessionmaker
 from MyWebsite.mod_auth.models import User
 from MyWebsite.mod_rescue.models import RescueAlert
 
-engine = create_engine('postgresql+psycopg2://postgres:qazwsx123@localhost/RescueApp')
+users_to_add = [('deelaws@hotmail.com', 'qwqwqwqwqw'),
+                ('besttimothy1@gmail.com', 'qwqwqwqwqw'),
+                ('jordanb@hotmail.com', 'qwqwqwqwqw'),
+                ('deelaws89@gmail.com', 'qwqwqwqwqw')]
 
-#connection = engine.connect()
 
-Session = sessionmaker(bind=engine)
+def add_test_users_to_database(session):
+    for user in users_to_add:
+        print("Username: \'%s\', password: \'%s\'" % (user[0], user[1]))
+        new_user = User(user[0], user[1])
+        new_user.test_account = True
+        session.add(new_user)
 
-session = Session()
+    session.commit()
 
-new_user = User("deelaws@hotmail.com", "qwqwqwqwqw")
-
-session.add(new_user)
-
-session.commit()
+if __name__ == "__main__":
+    engine = create_engine('postgresql+psycopg2://postgres:qazwsx123@localhost/RescueApp')
+    
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    add_test_users_to_database(session)
