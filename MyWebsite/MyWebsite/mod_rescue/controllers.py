@@ -20,7 +20,7 @@ def create_rescue_alert():
     form = CreateRescueAlertForm(request.form)
     if request.method == 'POST' and form.validate():
         alert = RescueAlert(form.adventure_name.data,
-                            int_to_adventure_type(0),
+                            form.adventure_type.checked,
                             form.adventure_start_time.data,
                             form.adventure_end_time.data)
         user = g.user
