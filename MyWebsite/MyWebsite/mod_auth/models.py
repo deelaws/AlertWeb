@@ -13,7 +13,7 @@ class User(Base):
     '''
     Email address will be the username
     '''
-    email = db.Column(db.String(user_name_max_length), primary_key=True, nullable=False)
+    email = db.Column(db.String(user_name_max_length), unique=True, nullable=False)
 
     '''
     Encrypted password for the user.    
@@ -27,8 +27,10 @@ class User(Base):
     first_name = db.Column(db.String(user_name_max_length),  nullable=True)
     last_name = db.Column(db.String(user_name_max_length),  nullable=True)
 
+    test_account = db.Column(db.Boolean, default=False)
+
     # One to many relationship with RescueAlert
-    rescue_alerts = db.relationship('RescueAlert', backref="user", cascade="all, delete-orphan", lazy='dynamic')
+    #rescue_alerts = db.relationship('RescueAlert', backref="user", cascade="all, delete-orphan", lazy='dynamic')
 
     def __init__(self, username, password):
         """Constructor"""
