@@ -8,7 +8,7 @@ from threading import Thread, Lock, Event
 
 def get_time_plus_minutes(min):
     now = datetime.now()
-    print("Now = {}".format(now))
+    print("Now               = {}".format(now))
     now_plus_min = now + timedelta(minutes=min)
     print("One hour from now = {}".format(now_plus_min))
     return now_plus_min
@@ -67,9 +67,7 @@ class RecordProcessorCore():
     '''
     def start_record_extractor_thread(self):
         self.record_extractor_thread = Thread(target=self.record_extractor_runner)
-        #self.record_extractor_thread.daemon = True
         self.record_extractor_thread.start()
-        print("processing thread started\n")
 
     '''
     Starts the specified number of threads that process records.
@@ -105,6 +103,9 @@ class RecordProcessorCore():
         finally:
             self.record_list_lock.release()
 
+    '''
+    Join with all the worker threads.
+    '''
     def join_process_threads(self):
         for th in self.processor_threads:
             th.join()
@@ -114,9 +115,6 @@ if __name__ == "__main__":
     rpc =  RecordProcessorCore(1)
     
     rpc.commence_engine()
-
-    
-    print("\t\t Engine commenced\n")
     
     while("exit" != input("enter exit to quit\n")):
         print("\t Continuing to process records")
