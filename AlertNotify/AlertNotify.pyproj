@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>54f77532-231e-4ed2-8543-1ba20f85816d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>AlertNotify.py</StartupFile>
+    <StartupFile>alert_process_thread.py</StartupFile>
     <SearchPath>..\MyWebsite\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -24,6 +24,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AlertNotify.py" />
+    <Compile Include="alert_process_thread.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyWebsite\MyWebsite.pyproj">
