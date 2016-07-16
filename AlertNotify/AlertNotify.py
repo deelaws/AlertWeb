@@ -57,34 +57,7 @@ class RecordProcessorCore():
             self.pull_records_from_db()
             self.record_pull_event.clear()
 
-    '''
-    Record processor method that works on the pulled records.
-    '''
-    def record_process_runner(self):
-        print("*** records process runner thread STARTED ***")
-        while(not self.stop_extracting):
-            records = self.pull_records_from_mem(3)
-            if None == records:
-                # If no records in the buffer then tell the extractor to pull
-                # records from memory
-                self.record_pull_event.set()
-            else:
-                print("*** processor has {} records to process ***".format(len(records)))
-                # Pull a couple records from the record buffer.
-                # What if the record buffer is empty
-                # recods are already sorted.
-                for alert in records:
-                    time_delta =  alert.adventure_end_time - datetime.now()
-                    
-                    # wait for (currenttime - first record) amount of time.
-                    print("\t sleeping for {} seconds".format(time_delta.seconds))
-                    if time_delta.days < 0:
-                        # time has expired. Send the alert now.
-                        print("\t TIME EXPIRED SENDING ALERT NOW.")
-                    else:
-                        sleep(time_delta.seconds)
-                        # wake up and send a message
-                        print("\t\t Sending email for alert which ended at {}".format(alert.adventure_end_time))
+    
 
     '''
     Start's a thread that pulls records into a central record buffer.
