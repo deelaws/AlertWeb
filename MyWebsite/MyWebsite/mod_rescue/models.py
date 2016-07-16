@@ -62,5 +62,10 @@ class RescueAlert(Base):
     def deactivate_alert(self):
         self.alert_active = False
 
+    def send_alert(self):
+        print("sending alert for adventure {}".format(self))
+
     def __repr__(self):
-        return '<AdventureType %r>' % self.adventure_type
+        return 'Alert: name=%s endtime=%s AdventureType %r>' % (self.adventure_name,
+                                                                self.adventure_end_time,
+                                                                self.adventure_type)
