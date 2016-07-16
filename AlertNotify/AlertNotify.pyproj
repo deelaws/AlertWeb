@@ -27,6 +27,15 @@
     <Compile Include="alert_process_thread.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="alert_process_engine.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="run_local_engine.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyWebsite\MyWebsite.pyproj">
