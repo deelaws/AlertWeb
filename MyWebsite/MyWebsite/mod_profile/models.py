@@ -3,7 +3,6 @@ from MyWebsite import db
 from MyWebsite.models import Base
 from MyWebsite.mod_profile.constants import *
 
-
 '''
 Profile model
 '''
