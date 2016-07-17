@@ -65,8 +65,9 @@ def generate_random_alerts(session, num):
         # pick random user
         user_num = randint(0,num_users-1)
 
+        adven_name = "yosemite" + str(i)
         # create the alert
-        new_alert = RescueAlert("yosemite", 
+        new_alert = RescueAlert(adven_name, 
                             AdventureType.SnowBoarding.value, 
                             func.current_timestamp(), 
                             get_time_plus_minutes(randint(0,60)))

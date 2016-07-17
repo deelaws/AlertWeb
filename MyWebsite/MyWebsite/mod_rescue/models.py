@@ -11,7 +11,6 @@ from MyWebsite.mod_auth.models import User
 Represents a new rescue alert
 """
 class RescueAlert(Base):
-
     __tablename__ = 'rescue_alert'
 
     adventure_name = db.Column(db.String(adventure_name_max_length), nullable=False)
@@ -66,6 +65,6 @@ class RescueAlert(Base):
         print("sending alert for adventure {}".format(self))
 
     def __repr__(self):
-        return 'Alert: name=%s endtime=%s AdventureType %r>' % (self.adventure_name,
+        return 'Alert: name=%s endtime=%s AdventureType %r' % (self.adventure_name,
                                                                 self.adventure_end_time,
                                                                 self.adventure_type)
