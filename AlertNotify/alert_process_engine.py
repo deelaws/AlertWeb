@@ -11,11 +11,18 @@ from threading import Thread, Lock, Event
 from time import sleep
 from alert_process_thread import AlertProcessThread
 
+
+def time_plus_min(base_time, min):
+    print("Base time                = {}".format(base_time))
+    base_plus_min = base_time + timedelta(minutes=min)
+    print("{} minutes from basetime = {}".format(min, base_plus_min))
+    return base_plus_min
+
 def get_time_plus_minutes(min):
     now = datetime.now()
     print("Now               = {}".format(now))
     now_plus_min = now + timedelta(minutes=min)
-    print("One hour from now = {}".format(now_plus_min))
+    print("{} minutes from now = {}".format(min, now_plus_min))
     return now_plus_min
 
 class AlertProcessEngine():
@@ -35,6 +42,7 @@ class AlertProcessEngine():
         self.alert_list_lock = Lock()
         self.alert_pull_event = Event()
         self.alert_pull_event.clear()
+        self.prev_expirty_time = None
 
         self.db_engine = create_engine('postgresql+psycopg2://postgres:qazwsx123@localhost/RescueApp')
 
@@ -63,7 +71,7 @@ class AlertProcessEngine():
                 print("Engine stopped after waking up")
                 break
 
-            self.pull_alerts_from_db()
+            self.extract_alerts_from_db()
             self.alert_pull_event.clear()
 
     def start_record_extractor(self):
@@ -81,7 +89,7 @@ class AlertProcessEngine():
 
     def start_engine(self):
         # TODO: FIXME: Ensure that engine is configured before starting engine
-        self.SessionM = sessionmaker(bind=self.engine)
+        self.SessionM = sessionmaker(bind=self.db_engine)
         self.session = self.SessionM()
 
         self.start_record_extractor()
@@ -90,6 +98,9 @@ class AlertProcessEngine():
     def fetch_alerts_from_mem(self):
         self.alert_list_lock.acquire()
         try:
+            # if not enough records in the buffer
+            if len(self.alerts_buff) < self.num_alert_process:
+                return None
             ret_list = []
             for i in range(self.num_alert_process):
                 ret_list.append(self.alerts_buff[i])
@@ -106,14 +117,19 @@ class AlertProcessEngine():
         print("Extracting records from db")
         self.alert_list_lock.acquire()
         try:
-            expiry_time = get_time_plus_minutes(self.alert_expiry_time)
+            start_from = datetime.now()
+            if None == self.prev_expirty_time:
+                self.prev_expirty_time = get_time_plus_minutes(self.alert_expiry_time)
+            else:
+                start_from = self.prev_expirty_time;
+                self.prev_expirty_time = time_plus_min(self.prev_expirty_time, self.alert_expiry_time)
 
             # Pull records from db which are sorted in ascending order
-            alerts = self.session.query(RescueAlert).filter(RescueAlert.adventure_end_time > datetime.now(), RescueAlert.adventure_end_time < expiry_time).order_by(asc(RescueAlert.adventure_end_time)).all()
+            alerts = self.session.query(RescueAlert).filter(RescueAlert.adventure_end_time > start_from, RescueAlert.adventure_end_time < self.prev_expirty_time).order_by(asc(RescueAlert.adventure_end_time)).all()
 
             self.alerts_buff[len(self.alerts_buff): len(self.alerts_buff)] = alerts
             for al in self.alerts_buff:
-                print("\t Adventure Name is {}, end-time {}".format(al.adventure_name, al.adventure_end_time))
+                print("\t Adventure Id {} Adventure Name is {}, end-time {}".format(al.id,  al.adventure_name, al.adventure_end_time))
         finally:
             self.alert_list_lock.release()
 

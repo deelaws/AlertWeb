@@ -11,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 from MyWebsite.mod_auth.models import User
 from MyWebsite.mod_rescue.models import RescueAlert
 from datetime import datetime, timedelta
-from threading import Thread, Lock, Event
+from threading import Thread, Lock, Event, current_thread
 from time import sleep
 
 class AlertProcessThread():
@@ -27,6 +27,7 @@ class AlertProcessThread():
     def record_process_runner(self):
         print("*** records process runner thread STARTED ***")
         while(not self._stop_processing):
+            print("THREAD {} getting records from Enginge".format(current_thread().name))
             self._records = self.processing_engine.fetch_alerts_from_mem()
             if None == self._records:
                 # If no records in the buffer then tell the Enginer Extractor to pull
@@ -48,7 +49,9 @@ class AlertProcessThread():
                     else:
                         sleep(time_delta.seconds)
                         # wake up and send a message
-                        print("\t\t Sending email for alert which ended at {}".format(alert.adventure_end_time))
+                        #print("\t\t Sending email for alert which ended at {}".format(alert.adventure_end_time))
+                        alert.send_alert()
 
     def shutdown(self):
+        printf("shutting engine down")
         self._stop_processing = True
