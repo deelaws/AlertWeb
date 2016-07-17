@@ -1,8 +1,10 @@
-﻿from sqlalchemy import create_engine
+﻿from sqlalchemy import create_engine, desc, asc
 from sqlalchemy.orm import sessionmaker
 from MyWebsite.mod_auth.models import User
 from MyWebsite.mod_rescue.models import RescueAlert
 from datetime import datetime, timedelta
+from time import sleep
+from math import log10
 
 def get_time_plus_minutes(min):
     now = datetime.now()
@@ -25,7 +27,14 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    time_plus_twenty = get_time_plus_minutes(20)
-    alerts = session.query(RescueAlert).filter(RescueAlert.adventure_end_time > datetime.now(), RescueAlert.adventure_end_time < time_plus_twenty )
+    time_plus_twenty = get_time_plus_minutes(5)
+    alerts = session.query(RescueAlert).filter(RescueAlert.adventure_end_time > datetime.now(), \
+                                               RescueAlert.adventure_end_time < time_plus_twenty ).order_by(asc(RescueAlert.adventure_end_time))
     for al in alerts:
         print("Alerts endtime {}".format(al.adventure_end_time))
+        
+        #time_delta =  datetime.now() - al.adventure_end_time
+        
+        time_delta = al.adventure_end_time - datetime.now()
+        print(time_delta.days < 0)
+        
