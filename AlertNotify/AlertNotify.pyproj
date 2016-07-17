@@ -45,7 +45,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Interpreter Include="..\MyWebsite\MyWebEnv\">
+    <Interpreter Include="..\AlertWeb\AlertWebEnv\">
       <Id>{52a382d6-2112-44d8-a4a5-80441cb5567f}</Id>
       <BaseInterpreter>{2af0f10d-7135-4994-9156-5d01c9c11b7e}</BaseInterpreter>
       <Version>3.4</Version>
