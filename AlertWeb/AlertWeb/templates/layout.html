@@ -1,53 +1,225 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en-US">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - Rescue Alert Application</title>
-    <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
-    <script src="/static/scripts/modernizr-2.6.2.js"></script>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>RescueAlert - Create Alerts to Save Lives</title>
+    <meta name="description" content="" />
+    <meta name="Author" content=Waleed Shahid [www.stepofweb.com]" />
+
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="static/plugins/lt-ie9/html5.js"></script>
+        <script type="text/javascript" src="static/plugins/lt-ie9/respond.min.js"></script>
+        <script type="text/javascript" src="static/plugins/lt-ie9/excanvas.compiled.js"></script>
+    <![endif]-->
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Dosis:300,400" rel="stylesheet" type="text/css" />
+
+
+    <!-- CORE CSS FRAMEWORK -->
+    <link href="static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/font-linecons/linecons.css" rel="stylesheet" type="text/css" />
+
+    <!-- PLUGINS -->
+    <link href="static/css/superslides.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/owl.carousel.css" rel="stylesheet" type="text/css" />
+    <link href="static/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+
+    <!-- CSS TEMPLATE -->
+    <link href="static/css/reset.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/framework.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/typography.css" rel="stylesheet" type="text/css" />
+    <link href="static/css/layout.css" rel="stylesheet" type="text/css" />
+
+    <link href="static/css/blog.css" rel="stylesheet" type="text/css" />
+
+    <!-- colors : demo only -->
+    <link href="static/css/color/green.css" rel="stylesheet" type="text/css" /><!-- default style : green-->
+    <link href="static/css/color/blue.css" rel="alternate stylesheet" type="text/css" title="blue" />
+    <link href="static/css/color/orange.css" rel="alternate stylesheet" type="text/css" title="orange" />
+    <link href="static/css/color/green.css" rel="alternate stylesheet" type="text/css" title="green" />
+    <link href="static/css/color/red.css" rel="alternate stylesheet" type="text/css" title="red" />
+    <link href="static/css/color/yellow.css" rel="alternate stylesheet" type="text/css" title="yellow" />
+    <link href="static/css/color/gray.css" rel="alternate stylesheet" type="text/css" title="gray" />
+    <link href="static/css/color/pink.css" rel="alternate stylesheet" type="text/css" title="pink" />
+    <link href="static/css/color/mauve.css" rel="alternate stylesheet" type="text/css" title="mauve" />
+
+    <!-- ICONS -->
+    <link rel="shortcut icon" href="static/images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="static/images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+
+    <!-- STYLESWITCHER -->
+    <link href="static/plugins/styleswitcher/styleswitcher.css" rel="stylesheet" type="text/css" />
+
+    <!-- Morenizr -->
+    <script type="text/javascript" src="static/plugins/modernizr.min.js"></script>
 </head>
-
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">Rescue Alert</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                    <li><a href="{{ url_for('rescue_alert.create_rescue_alert') }}">Create Alert</a></li>
-                    {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('auth.logout') }}">Logout </a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-                    {% endif%}
-                </ul>
-            </div>
+    <!-- Main Nav -->
+    {% block header %} {% endblock %}
+    <!-- /Main Nav -->
+    <!-- /STYLESWITCHER -->
+    <!-- HOME -->
+    <section id="home" class="full-screen">
+        <!-- full-screen or half-screen (550px height) -->
+
+        <div id="slider">
+
+            <!-- slider navigation -->
+            <nav class="slides-navigation">
+                <a class="prev" href="#"></a>
+                <a class="next" href="#"></a>
+            </nav>
+
+            <ul class="slides-container">
+
+                <!-- Item 1 -->
+                <li>
+                    <div class="image-caption">
+                        <hr /><hr />
+                        <div class="inner">
+                            <h2 class="bigtext strtoupper nomargin">Rescue Alert App</h2>
+                            <p>NEW RELEASE AVAILABLE</p>
+                        </div>
+                        <hr /><hr />
+                    </div>
+
+                    <!--<span class="overlay"></span>-->
+                    <div style="background-image: url('static/images/preview/slider/vision.jpg');" class="fullscreen-img"></div>
+                </li>
+
+                <!-- Item 2 -->
+                <li>
+                    <div class="image-caption">
+                        <hr /><hr />
+                        <div class="inner">
+                            <h1 class="bigtext strtoupper nomargin">ONE PAGE DESIGN</h1>
+                            <p>THE TEMPLATE IS EASY TO SET UP</p>
+                        </div>
+                        <hr /><hr />
+                    </div>
+
+                    <!--<span class="overlay"></span>-->
+                    <div style="background-image: url('static/images/preview/slider/background.jpg');" class="fullscreen-img"></div>
+                </li>
+
+            </ul>
+
         </div>
-    </div>
 
-    <div class="container body-content">
-        {% block content %}{% endblock %}
-        <hr />
-        <footer>
-            <p>&copy; {{ year }} - Rescue Alert App</p>
-        </footer>
-    </div>
+    </section>
+    <!-- /HOME -->
 
-    <script src="/static/scripts/jquery-1.10.2.js"></script>
-    <script src="/static/scripts/bootstrap.js"></script>
-    <script src="/static/scripts/respond.js"></script>
-    {% block scripts %}{% endblock %}
+
+    
+
+    {% block content %} {% endblock %}
+
+    <!-- RELEASED -->
+    {% block released %} {% endblock %}
+    <!-- /RELEASED -->
+
+    
+    <!-- QUOTE -->
+    <section class="cover" style="background-image:url('static/images/preview/slider/3.jpg')">
+        <span class="overlay"></span>
+        <div class="container text-center" data-animation="bounceIn">
+            <q>We can't solve problems by using the same kind of thinking we used when we created them.</q>
+            <cite>Albert Einstein</cite>
+        </div>
+    </section>
+    <!-- /QUOTE -->
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+
+            <header class="text-center">
+                <h1>ABOUT Rescue Alert App</h1>
+            </header>
+
+            <div class="divider"><!-- lines divider --></div>
+
+            <article class="text-center big-paragraph">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+            </article>
+
+            <article>
+                <div class="row text-left">
+
+                    <!-- Passion -->
+                    <div class="col-md-4">
+                        <h3>Passion</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                    </div>
+
+
+                    <!-- Precision -->
+                    <div class="col-md-4">
+                        <h3>Precision</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                    </div>
+
+
+                    <!-- Simplicity -->
+                    <div class="col-md-4">
+                        <h3>Simplicity</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Etiam suscipit nisl eget lorem pellentesque quis iaculis mi mattis.</p>
+                    </div>
+
+                </div>
+            </article>
+
+            <!-- curriculum vitae button  -->
+            <!--
+                <article class="curriculum-vitae text-center">
+                    <a href="#" class="plusNav">+</a>
+                    <p>curriculum vitae</p>
+                </article>
+            -->
+
+        </div>
+    </section>
+    <!-- /ABOUT -->
+
+    <!-- CONTACT -->
+    {% block contact %} {% endblock %}
+    <!-- /CONTACT -->
+    
+    <!-- FOOTER -->
+    {% block footer %}{% endblock %}
+    <!-- /FOOTER -->
+
+    <!-- CORE FILES -->
+    <script type="text/javascript" src="static/plugins/jquery/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="static/plugins/jquery.isotope.js"></script>
+    <script type="text/javascript" src="static/plugins/masonry.js"></script>
+
+    <!-- PLUGINS -->
+    <script type="text/javascript" src="static/plugins/jquery-appear/jquery.appear.js"></script>
+    <script type="text/javascript" src="static/plugins/superslides/dist/jquery.superslides.min.js"></script>
+    <script type="text/javascript" src="static/plugins/jquery-owl-carousel/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="static/plugins/carouFredSel/jquery.carouFredSel-6.2.1-packed.js"></script>
+    <script type="text/javascript" src="static/plugins/jquery-countTo/jquery.countTo.js"></script>
+    <script type="text/javascript" src="static/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="static/plugins/jquery.mb.YTPlayer.js"></script><!-- Youtube video background -->
+    <script type="text/javascript" src="static/plugins/holder.js"></script><!-- delete on production -->
+    <!-- js scripts -->
+    <script async type="text/javascript" src="static/js/scripts.js"></script>
+
+    <script async type="text/javascript" src="static/plugins/styleswitcher/styleswitcher.js"></script>
+
+
+    <!-- Change UA-XXXXX-X with your site ID -->
+    <!--<script>
+        window._gaq = [['_setAccount','UA-XXXXX-X'],['_trackPageview'],['_trackPageLoadTime']];
+        Modernizr.load({load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'});
+    </script>  -->
 
 </body>
 </html>
