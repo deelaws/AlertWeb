@@ -1,20 +1,59 @@
 ﻿{% from "_formhelper.html" import render_field %}
 {% extends "layout.html" %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
 {% block content %}
+
 
 <form method=post action="/rescue/create">
     <dl>
         {{ render_field(form.adventure_name) }}
         {{ render_field(form.adventure_type) }}
-        {{ form.adventure_start_time(class='datepicker') }}
-        {{ form.adventure_end_time(class='datepicker') }}
+        {{ form.adventure_end_date(class='datepicker') }}
+
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    Adventure Start Time:
+                </div>
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control"  id="adventure_start_time" name="adventure_start_time"/>
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+            $(document).ready(function () {
+
+                $(function () {
+                    $('#adventure_start_time').datetimepicker();
+                });
+            });
+
+                </script>
+            </div>
+        </div>
+
     </dl>
     <p><input type=submit value=CreateAlert>
 </form>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
 
+
+{% endblock %}
+
+
+{% block contact %}
+    {% include 'contact.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
 {% endblock %}

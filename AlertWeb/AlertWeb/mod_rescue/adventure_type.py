@@ -18,7 +18,7 @@ def generate_adventure_tuple():
     ret = []
     ad_map = AdventureType._member_map_
     for k in ad_map:
-        ret.append((k,ad_map[k].value))
+        ret.append((ad_map[k].value, k))
     return ret
 
 adventure_type_tuples = generate_adventure_tuple()
