@@ -23,18 +23,12 @@ Creates a rescue alert for the current user
 @login_required
 def create_rescue_alert():
     form = CreateRescueAlertForm(request.form)
-    print("============================data=================================")
-    print(form)
-    print(form.adventure_start_time.data)
-    print(form.adventure_start_time)
-    print(form.adventure_start_time.raw_data)
-    print("=============================================================")
-    if request.method == 'POST':
+    if request.method == 'POST' and form.validate():
         print("FORM is VALIDATED")
         alert = RescueAlert(form.adventure_name.data,
                             form.adventure_type.data,
                             convert_client_time(form.adventure_start_time.raw_data[0]),
-                            form.adventure_end_date.data)
+                            convert_client_time(form.adventure_end_time.raw_data[0]))
         user = g.user
         user.rescue_alerts.append(alert)
         db.session.add(user)
@@ -48,7 +42,6 @@ List's the rescue alerts for the current user
 '''
 @mod_resc_alert.route('/list', methods=['GET'])
 @login_required
-def list_rescue_alert():
+def list_rescue_alerts():
     alerts = g.user.rescue_alerts
     return render_template("rescue/list_alerts.html", alerts=alerts, user=g.user)
-
