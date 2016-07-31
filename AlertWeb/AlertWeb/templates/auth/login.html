@@ -1,5 +1,10 @@
 ﻿{% from "_formhelper.html" import render_field %}
 {% extends "layout.html" %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
 {% block content %}
 
 <form method=post action="/auth/login">
@@ -9,10 +14,5 @@
     </dl>
     <p><input type=submit value=Login!>
 </form>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
 
 {% endblock %}

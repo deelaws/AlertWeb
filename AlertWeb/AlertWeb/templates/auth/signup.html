@@ -1,5 +1,11 @@
 ﻿{% from "_formhelper.html" import render_field %}
 {% extends "layout.html" %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
+
 {% block content %}
 
 <form method=post action="/auth/signup">
@@ -15,4 +21,12 @@
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
+{% endblock %}
+
+{% block contact %}
+    {% include 'contact.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
 {% endblock %}
