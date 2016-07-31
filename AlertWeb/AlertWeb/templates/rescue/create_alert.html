@@ -1,4 +1,4 @@
-﻿{% from "_formhelper.html" import render_field %}
+﻿{% from "_formhelper.html" import render_field, display_errors %}
 {% extends "layout.html" %}
 
 {% block header %}
@@ -7,22 +7,49 @@
 
 {% block content %}
 
-
 <form method=post action="/rescue/create">
     <dl>
         {{ render_field(form.adventure_name) }}
         {{ render_field(form.adventure_type) }}
-        {{ form.adventure_end_date(class='datepicker') }}
 
         <div class="container">
+            {{ display_errors(form.adventure_start_time)}}
             <div class="row">
                 <div class='col-sm-6'>
-                    Adventure Start Time:
+                    {{ form.adventure_start_time.label}}
                 </div>
                 <div class='col-sm-6'>
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control"  id="adventure_start_time" name="adventure_start_time"/>
+                            <input type='text' class="form-control" id="adventure_start_time" name="adventure_start_time" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(function () {
+                $('#adventure_start_time').datetimepicker();
+            });
+        });
+
+                </script>
+            </div>
+        </div>
+
+        <div class="container">
+            {{ display_errors(form.adventure_end_time)}}
+            <div class="row">
+                <div class='col-sm-6'>
+                    {{ form.adventure_end_time.label}}
+                </div>
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" id="adventure_end_time" name="adventure_end_time" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -33,22 +60,17 @@
             $(document).ready(function () {
 
                 $(function () {
-                    $('#adventure_start_time').datetimepicker();
+                    $('#adventure_end_time').datetimepicker();
                 });
             });
-
                 </script>
             </div>
-        </div>
 
-    </dl>
+</dl>
     <p><input type=submit value=CreateAlert>
 </form>
 
-
-
 {% endblock %}
-
 
 {% block contact %}
     {% include 'contact.html' %}
