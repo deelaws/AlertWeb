@@ -8,19 +8,38 @@
 {% block content %}
 
 <form method=post action="/rescue/create">
+    <div style="overflow:hidden;">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="datetimepicker12"></div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker12').datetimepicker({
+                inline: true,
+                sideBySide: true
+            });
+        });
+        </script>
+    </div>
+
     <dl>
         {{ render_field(form.adventure_name) }}
         {{ render_field(form.adventure_type) }}
 
         <div class="container">
+
+            {{ form.adventure_start_time.raw_data[0]}}
             {{ display_errors(form.adventure_start_time)}}
             <div class="row">
                 <div class='col-sm-6'>
                     {{ form.adventure_start_time.label}}
                 </div>
                 <div class='col-sm-6'>
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
+                        <div class='input-group date' id="adventure_start_time_dp">
                             <input type='text' class="form-control" id="adventure_start_time" name="adventure_start_time" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -32,7 +51,16 @@
         $(document).ready(function () {
 
             $(function () {
-                $('#adventure_start_time').datetimepicker();
+                $(function () {
+                    $('#adventure_start_time').datetimepicker({
+                        useCurrent: true,
+                        defaultDate: new Date()
+                    });
+                });
+
+                $("#adventure_start_time").on("dp.change", function (e) {
+
+                });
             });
         });
 
@@ -60,8 +88,16 @@
             $(document).ready(function () {
 
                 $(function () {
-                    $('#adventure_end_time').datetimepicker();
+                    $('#adventure_end_time').datetimepicker({useCurrent: true,
+                                                             defaultDate: new Date()});
                 });
+
+                $("#adventure_end_time").on("dp.change", function(e) {
+                    
+                });
+
+                //$('#adventure_end_time').data('DateTimePicker').date(new Date());
+
             });
                 </script>
             </div>

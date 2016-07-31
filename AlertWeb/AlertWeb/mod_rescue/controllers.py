@@ -23,6 +23,12 @@ Creates a rescue alert for the current user
 @login_required
 def create_rescue_alert():
     form = CreateRescueAlertForm(request.form)
+    print("======================")
+    print(form.adventure_name.data)
+    print(form.adventure_start_time.data)
+    print(form.adventure_start_time.raw_data)
+    print(form.adventure_end_time.data)
+    print(form.adventure_end_time.raw_data)
     if request.method == 'POST' and form.validate():
         print("FORM is VALIDATED")
         alert = RescueAlert(form.adventure_name.data,
