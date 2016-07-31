@@ -10,7 +10,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <a class="navbar_brand scrollTo" href="#home">
-                    <img src="static/images/logo/100x100/white.png" alt="" width="50" height="50" />
+                    <img src="/static/images/logo/100x100/white.png" alt="" width="50" height="50" />
                     <!--
                         Span class:
                             - dark
@@ -21,7 +21,7 @@
                             Example:
                                 <span class="white">ISIS</span><span class="styleColor">ONE</span>
                     -->
-                    <span class="">Rescue Alert</span>
+                    <span ahref="{{ url_for('home')}}" class="">Rescue Alert</span>
                 </a>
             </div>
 
@@ -32,6 +32,14 @@
                 <a href="#" class="btn-fullscreen"><i class="fa fa-external-link"></i></a>
 
                 <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('rescue_alert.create_rescue_alert') }}">Create Alert</a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Logout </a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('auth.signup') }}">Signup</a></li>
+                    <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                    {% endif%}
+                    
                     <li><a href="#home" class="scrollTo">Home</a></li>
                     <li><a href="#about" class="scrollTo">About</a></li>
                     <li><a href="blog.html">Blog</a></li>

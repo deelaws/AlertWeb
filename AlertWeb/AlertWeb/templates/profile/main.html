@@ -1,4 +1,9 @@
 ﻿{% extends "layout.html" %}
+
+{% block header %}
+    {% include 'header.html' %}
+{% endblock %}
+
 {% block content %}
 
 <div>Welcome {{ user.email }}</div>
@@ -9,9 +14,12 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+{% endblock %}
 
+{% block contact %}
+    {% include 'contact.html' %}
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer.html' %}
 {% endblock %}

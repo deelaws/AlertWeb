@@ -10,10 +10,59 @@
 {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
-<div> {{ message }} </div>
+                <div class="alert alert-success" role="alert">{{ message }}</div>
             {% endfor %}
         {% endif %}
 {% endwith %}
+
+<section id="home" class="full-screen">
+    <!-- full-screen or half-screen (550px height) -->
+
+    <div id="slider">
+
+        <!-- slider navigation -->
+        <nav class="slides-navigation">
+            <a class="prev" href="#"></a>
+            <a class="next" href="#"></a>
+        </nav>
+
+        <ul class="slides-container">
+
+            <!-- Item 1 -->
+            <li>
+                <div class="image-caption">
+                    <hr /><hr />
+                    <div class="inner">
+                        <h2 class="bigtext strtoupper nomargin">Rescue Alert App</h2>
+                        <p>NEW RELEASE AVAILABLE</p>
+                    </div>
+                    <hr /><hr />
+                </div>
+
+                <!--<span class="overlay"></span>-->
+                <div style="background-image: url('static/images/preview/slider/vision.jpg');" class="fullscreen-img"></div>
+            </li>
+
+            <!-- Item 2 -->
+            <li>
+                <div class="image-caption">
+                    <hr /><hr />
+                    <div class="inner">
+                        <h1 class="bigtext strtoupper nomargin">ONE PAGE DESIGN</h1>
+                        <p>THE TEMPLATE IS EASY TO SET UP</p>
+                    </div>
+                    <hr /><hr />
+                </div>
+
+                <!--<span class="overlay"></span>-->
+                <div style="background-image: url('static/images/preview/slider/background.jpg');" class="fullscreen-img"></div>
+            </li>
+
+        </ul>
+
+    </div>
+
+</section>
 
 {% endblock %}
 
