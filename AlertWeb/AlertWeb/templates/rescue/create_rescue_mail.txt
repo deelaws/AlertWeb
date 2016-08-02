@@ -1,0 +1,5 @@
+Adventure Name:       {{ralert.adventure_name}}
+Adventure Start time: {{ralert.adventure_start_time}}
+Adventure End time:   {{ralert.adventure_end_time}}
+Adventurer's Name:    {{ralert.user.first_name}}
+Adventurer's Email:   {{ralert.user.email}}
