@@ -56,7 +56,7 @@ LOGOUT VIEW
 def logout():
     flash('Logged out successfully.')
     logout_user()
-    return redirect(url_for('home')) 
+    return redirect(url_for('mod_main.home')) 
 
 '''
 SIGNUP VIEW

@@ -1,7 +1,11 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
+
+from flask import current_app as alert_app
+
+from flask_mail import Mail, Message
 from flask_login import login_required
-from AlertWeb import db
+from AlertWeb import db, mail
 from AlertWeb.mod_rescue.forms import CreateRescueAlertForm
 from AlertWeb.mod_rescue.models import RescueAlert
 from AlertWeb.mod_rescue.adventure_type import *
@@ -15,6 +19,16 @@ mod_resc_alert = Blueprint('rescue_alert',__name__, url_prefix='/rescue')
 
 def convert_client_time(time):
     return datetime.strptime(time, '%m/%d/%Y %I:%M %p')
+
+
+def send_alert_created_mail(subject, recipient, **kwargs):
+    msg = Message(alert_app.config['ALERT_WEB_MAIL_SUBJECT_PREFIX'] + subject,
+                  sender=alert_app.config['MAIL_USERNAME'],
+                  recipients=[recipient])
+    msg.body = render_template('rescue/create_rescue_mail' + '.txt', **kwargs)
+    msg.html = render_template('rescue/create_rescue_mail' + '.html', **kwargs)
+    mail.send(msg)
+    print("MAIL Sent")
 
 '''
 Creates a rescue alert for the current user
@@ -40,6 +54,7 @@ def create_rescue_alert():
         db.session.add(user)
         db.session.commit()
         flash('Successfully create a Rescue Alert!')
+        send_alert_created_mail("Rescue Alert Created", user.email, ralert=alert)
         return redirect(url_for('home'))
     return render_template("rescue/create_alert.html", form=form)
 

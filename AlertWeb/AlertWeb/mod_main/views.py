@@ -3,21 +3,16 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template, g, session
-from AlertWeb import app
+from flask import render_template
+from flask import current_app as app
 from flask_login import login_required
 from AlertWeb.mod_auth.models import User
+from . import mod_main
 
-@app.before_request
-def add_user_to_g():
-    if session.get("user_id"):
-        user_obj = User.query.filter_by(email=session["user_id"]).first()
-    else:
-        user_obj = None #{"name": "Guest"}  # Make it better, use an anonymous User instead
-    g.user = user_obj
 
-@app.route('/')
-@app.route('/home')
+
+@mod_main.route('/')
+@mod_main.route('/home')
 def home():
     """Renders the home page."""
     print("home function*******")
@@ -27,7 +22,7 @@ def home():
         year=datetime.now().year,
     )
     
-@app.route('/contact')
+@mod_main.route('/contact')
 def contact():
     """Renders the contact page."""
     ab = 1
@@ -39,7 +34,7 @@ def contact():
         message='Your contact page.'
     )
 
-@app.route('/about')
+@mod_main.route('/about')
 @login_required
 def about():
     """Renders the about page."""
@@ -50,7 +45,7 @@ def about():
         message='Your application description page.'
     )
 
-@app.route('/profile')
+@mod_main.route('/profile')
 @login_required
 def profile_main():
     return render_template('profile/main.html', user=g.user)
