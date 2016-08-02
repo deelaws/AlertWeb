@@ -20,6 +20,12 @@
     <RootNamespace>AlertWeb</RootNamespace>
     <InterpreterId>{9e3d2f69-ef5b-4fce-b0b4-a4c0e31fc1c7}</InterpreterId>
     <InterpreterVersion>3.4</InterpreterVersion>
+    <PythonRunWebServerCommandEnvironment>MAIL_USERNAME=deelaws89</PythonRunWebServerCommandEnvironment>
+    <PythonDebugWebServerCommandEnvironment>MAIL_USERNAME=deelaws89@gmail.com
+MAIL_PASSWORD=idontknowmniws786
+CONFIG_TYPE=development</PythonDebugWebServerCommandEnvironment>
+    <PythonRunWebServerCommandType>script</PythonRunWebServerCommandType>
+    <PythonDebugWebServerCommandType>script</PythonDebugWebServerCommandType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,6 +36,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AlertWeb\config.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AlertWeb\manage.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AlertWeb\migrate.py">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +49,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AlertWeb\mod_auth\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AlertWeb\mod_main\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AlertWeb\mod_profile\constants.py">
@@ -79,7 +94,7 @@
     <Compile Include="record_processor.py" />
     <Compile Include="runserver.py" />
     <Compile Include="AlertWeb\__init__.py" />
-    <Compile Include="AlertWeb\views.py" />
+    <Compile Include="AlertWeb\mod_main\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AlertWeb\" />
@@ -87,6 +102,7 @@
     <Folder Include="AlertWeb\mod_auth\" />
     <Folder Include="AlertWeb\mod_profile\" />
     <Folder Include="AlertWeb\mod_rescue\" />
+    <Folder Include="AlertWeb\mod_main\" />
     <Folder Include="AlertWeb\static\" />
     <Folder Include="AlertWeb\static\content\" />
     <Folder Include="AlertWeb\static\css\" />
@@ -413,6 +429,8 @@
     <Content Include="AlertWeb\templates\profile\main.html" />
     <Content Include="AlertWeb\templates\released.html" />
     <Content Include="AlertWeb\templates\rescue\create_alert.html" />
+    <Content Include="AlertWeb\templates\rescue\create_rescue_mail.html" />
+    <Content Include="AlertWeb\templates\rescue\create_rescue_mail.txt" />
     <Content Include="AlertWeb\templates\rescue\list_alerts.html" />
     <Content Include="AlertWeb\templates\_formhelper.html" />
     <Content Include="requirements.txt" />
