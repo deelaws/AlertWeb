@@ -11,8 +11,7 @@ class Config(object):
     MAIL_PORT = 465 
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
+
     ALERT_WEB_MAIL_SUBJECT_PREFIX = '[Rescue Alert]'
 
     @staticmethod
@@ -23,11 +22,16 @@ class DevelopmentConfig(Config):
     DEBUG = True
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
-    MAIL_USE_TLS = True
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:qazwsx123@localhost/RescueApp'
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'production database uri'
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_USE_TLS = False
+    MAIL_USE_SSL = True
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+
     DEBUG = False
 
 class TestConfig(Config):

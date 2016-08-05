@@ -21,9 +21,7 @@
     <InterpreterId>{9e3d2f69-ef5b-4fce-b0b4-a4c0e31fc1c7}</InterpreterId>
     <InterpreterVersion>3.4</InterpreterVersion>
     <PythonRunWebServerCommandEnvironment>MAIL_USERNAME=deelaws89</PythonRunWebServerCommandEnvironment>
-    <PythonDebugWebServerCommandEnvironment>MAIL_USERNAME=deelaws89@gmail.com
-MAIL_PASSWORD=idontknowmniws786
-CONFIG_TYPE=development</PythonDebugWebServerCommandEnvironment>
+    <PythonDebugWebServerCommandEnvironment></PythonDebugWebServerCommandEnvironment>
     <PythonRunWebServerCommandType>script</PythonRunWebServerCommandType>
     <PythonDebugWebServerCommandType>script</PythonDebugWebServerCommandType>
   </PropertyGroup>
