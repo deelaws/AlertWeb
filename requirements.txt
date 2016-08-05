@@ -1,0 +1,3 @@
+# heroku requires requirments.txt file in the root folder of app so 
+# we include the main file here to keep the VS structure working.
+-r AlertWeb/requirements.txt
