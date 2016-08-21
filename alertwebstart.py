@@ -16,6 +16,7 @@ sys.path.insert(1, '.')
 
 from AlertWeb import *
 
+print("calling main")
 if __name__ == '__main__':
     app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
     port = int(os.environ.get('PORT', 33447))
