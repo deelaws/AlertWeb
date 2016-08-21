@@ -10,8 +10,12 @@ cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(insp
 if cmd_subfolder not in sys.path:
     sys.path.insert(0, cmd_subfolder)
 
-from AlertWeb import create_app
+#sys.path.insert(1, '.')
+
+#print(sys.path)
+
+from AlertWeb import *
 
 if __name__ == '__main__':
-    app = create_app(environ.get('CONFIG_TYPE', 'production'))
+    app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
     app.run()
