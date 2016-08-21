@@ -54,7 +54,7 @@ def create_rescue_alert():
         db.session.add(user)
         db.session.commit()
         flash('Successfully create a Rescue Alert!')
-        send_alert_created_mail("Rescue Alert Created", user.email, ralert=alert)
+        #send_alert_created_mail("Rescue Alert Created", user.email, ralert=alert)
         return redirect(url_for('mod_main.home'))
     return render_template("rescue/create_alert.html", form=form)
 
