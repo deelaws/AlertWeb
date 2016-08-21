@@ -1,1 +1,1 @@
-web: gunicorn alertwebstart:app --log-file=-
+web: gunicorn alertwebstart:app -b 0.0.0.0:$PORT --log-file=-
