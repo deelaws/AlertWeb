@@ -12,7 +12,7 @@ if cmd_subfolder not in sys.path:
 
 #sys.path.insert(1, '.')
 
-#print(sys.path)
+print(sys.path)
 
 from AlertWeb import *
 
