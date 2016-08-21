@@ -17,10 +17,14 @@ sys.path.insert(1, '.')
 from AlertWeb import *
 
 print("calling main")
+
+print("outside main")
+app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
+port = int(os.environ.get('PORT', 33447))
+print("here")
+app.run(debug=False, host='0.0.0.0', port=port)
+print(sys.path)
+
+
 if __name__ == '__main__':
     print("inside main")
-    app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
-    port = int(os.environ.get('PORT', 33447))
-    print("here")
-    app.run(debug=False, host='0.0.0.0', port=port)
-    print(sys.path)
