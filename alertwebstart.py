@@ -22,7 +22,7 @@ print("outside main")
 app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
 port = int(os.environ.get('PORT', 33507))
 print(port)
-app.run(debug=False, host='0.0.0.0', port=port)
+#app.run(debug=False, host='0.0.0.0', port=port)
 print(sys.path)
 
 
