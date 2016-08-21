@@ -9,6 +9,7 @@ from flask_mail import Mail, Message
 from flask_sqlalchemy import SQLAlchemy
 from AlertWeb.config import configuration
 
+
 mail = Mail()
 db = SQLAlchemy()
 login_manager = LoginManager()
