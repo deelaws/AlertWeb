@@ -78,7 +78,7 @@ def signup():
             print("hello 3")
             flash('Thanks for registering')
             # TODO send email to the user for registration signup
-            return redirect(url_for('home'))
+            return redirect(url_for('mod_main.home'))
     return render_template('auth/signup.html', form=form)
 
 
