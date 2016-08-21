@@ -12,10 +12,13 @@ if cmd_subfolder not in sys.path:
 
 sys.path.insert(1, '.')
 
-#print(sys.path)
+
 
 from AlertWeb import *
 
 if __name__ == '__main__':
     app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
-    app.run()
+    port = int(os.environ.get('PORT', 33447))
+    print("here")
+    app.run(debug=False, host='0.0.0.0', port=port)
+    print(sys.path)
