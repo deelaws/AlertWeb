@@ -18,6 +18,7 @@ from AlertWeb import *
 
 print("calling main")
 if __name__ == '__main__':
+    print("inside main")
     app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
     port = int(os.environ.get('PORT', 33447))
     print("here")
