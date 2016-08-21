@@ -71,8 +71,11 @@ def signup():
             form.user_name.errors.append('Username taken')
         else:
             user = User(form.user_name.data, form.password.data)
+            print("hello")
             db.session.add(user)
+            print("hello 2")
             db.session.commit()
+            print("hello 3")
             flash('Thanks for registering')
             # TODO send email to the user for registration signup
             return redirect(url_for('home'))
