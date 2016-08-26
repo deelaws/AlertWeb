@@ -14,13 +14,22 @@
         {% endif %}
 {% endwith %}
 
-<div>These are your alerts {{ user.email }}</div>
+<div><h3>These are your alerts {{ user.email }}</h3></div>
 
-
-{% for alert in alerts %}
-    <div> {{ alert.adventure_name }}   starting on: {{ alert.adventure_start_time}} </div>
-{% endfor %}
-
+<ul>
+    {% for alert in alerts %}
+    <li>
+        <div id="{{alert.id}}">
+            {{ alert.adventure_name }}   starting on: {{ alert.adventure_start_time}}
+            {% if alert.alert_active %}
+                ACTIVE                
+            {% else %}
+                DEACTIVE
+            {% endif %}
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}
 
 {% block contact %}
