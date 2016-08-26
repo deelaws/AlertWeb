@@ -26,9 +26,12 @@
         <div id="{{alert.id}}">
             {{ alert.adventure_name }}   starting on: {{ alert.adventure_start_time}}
             {% if alert.alert_active %}
-                ACTIVE                
+                ACTIVE   <button class="DeactivateButton btn btn-default" type="button">DE-ACTIVATE</button>
             {% else %}
-                DEACTIVE
+                DEACTIVE <button class="activateButton btn btn-default" type="button">
+                             <span class="glyphicon glyphicon-star" aria-hidden="true"></span>   
+                            ACTIVATE
+                         </button>
             {% endif %}
         </div>
     </li>
