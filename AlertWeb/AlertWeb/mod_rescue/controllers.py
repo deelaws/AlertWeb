@@ -34,6 +34,20 @@ def activate_alert(alert_id):
 
     return False
 
+def deactivate_alert(alert_id):
+    alert =  db.session.query(RescueAlert).filter(RescueAlert.id == alert_id).one()
+    if alert:
+        if not alert.alert_active:
+            return False
+        else:
+            alert.alert_active = False
+            db.session.add(alert)
+            db.session.commit()
+            print("alert de activated")
+            return True
+
+    return False
+
 def send_alert_created_mail(subject, recipient, **kwargs):
     msg = Message(alert_app.config['ALERT_WEB_MAIL_SUBJECT_PREFIX'] + subject,
                   sender=alert_app.config['MAIL_USERNAME'],
@@ -84,3 +98,17 @@ def activate_alert_control():
         return "{\"Activated\": \"True\"}"
     else:
         return "{\"Activated\": \"False\"}"
+
+
+'''
+Deactivate an alert
+'''
+@mod_resc_alert.route('/deactivate', methods=['POST'])
+@login_required
+def deactivate_alert_control():
+    print(request.form.getlist('alertid')[0])
+    ret = activate_alert(request.form.getlist('alertid')[0])
+    if ret:
+        return "{\"Deactivated\": \"True\"}"
+    else:
+        return "{\"Deactivated\": \"False\"}"
