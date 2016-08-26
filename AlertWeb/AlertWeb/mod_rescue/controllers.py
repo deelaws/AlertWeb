@@ -28,7 +28,6 @@ def send_alert_created_mail(subject, recipient, **kwargs):
     msg.body = render_template('rescue/create_rescue_mail' + '.txt', **kwargs)
     msg.html = render_template('rescue/create_rescue_mail' + '.html', **kwargs)
     mail.send(msg)
-    print("MAIL Sent")
 
 '''
 Creates a rescue alert for the current user
@@ -37,14 +36,7 @@ Creates a rescue alert for the current user
 @login_required
 def create_rescue_alert():
     form = CreateRescueAlertForm(request.form)
-    print("======================")
-    print(form.adventure_name.data)
-    print(form.adventure_start_time.data)
-    print(form.adventure_start_time.raw_data)
-    print(form.adventure_end_time.data)
-    print(form.adventure_end_time.raw_data)
     if request.method == 'POST' and form.validate():
-        print("FORM is VALIDATED")
         alert = RescueAlert(form.adventure_name.data,
                             form.adventure_type.data,
                             convert_client_time(form.adventure_start_time.raw_data[0]),
@@ -64,5 +56,14 @@ List's the rescue alerts for the current user
 @mod_resc_alert.route('/list', methods=['GET'])
 @login_required
 def list_rescue_alerts():
+    alerts = g.user.rescue_alerts
+    return render_template("rescue/list_alerts.html", alerts=alerts, user=g.user)
+
+'''
+Activates an alert
+'''
+@mod_resc_alert.route('/activate', methods=['POST'])
+@login_required
+def activate_alert():
     alerts = g.user.rescue_alerts
     return render_template("rescue/list_alerts.html", alerts=alerts, user=g.user)
