@@ -20,6 +20,19 @@ mod_resc_alert = Blueprint('rescue_alert',__name__, url_prefix='/rescue')
 def convert_client_time(time):
     return datetime.strptime(time, '%m/%d/%Y %I:%M %p')
 
+def activate_alert(alert_id):
+    alert =  db.session.query(RescueAlert).filter(RescueAlert.id == alert_id).one()
+    if alert:
+        if alert.alert_active:
+            return False
+        else:
+            alert.alert_active = True
+            db.session.add(alert)
+            db.session.commit()
+            print("alert activated")
+            return True
+
+    return False
 
 def send_alert_created_mail(subject, recipient, **kwargs):
     msg = Message(alert_app.config['ALERT_WEB_MAIL_SUBJECT_PREFIX'] + subject,
@@ -64,6 +77,10 @@ Activates an alert
 '''
 @mod_resc_alert.route('/activate', methods=['POST'])
 @login_required
-def activate_alert():
-    alerts = g.user.rescue_alerts
-    return render_template("rescue/list_alerts.html", alerts=alerts, user=g.user)
+def activate_alert_control():
+    print(request.form.getlist('alertid')[0])
+    ret = activate_alert(request.form.getlist('alertid')[0])
+    if ret:
+        return "{\"Activated\": \"True\"}"
+    else:
+        return "{\"Activated\": \"False\"}"
