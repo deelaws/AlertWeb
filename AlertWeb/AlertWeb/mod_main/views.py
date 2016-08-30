@@ -3,10 +3,12 @@ Routes and views for the flask application.
 """
 
 from datetime import datetime
-from flask import render_template
+from flask import render_template, redirect
 from flask import current_app as app
 from flask_login import login_required
+from flask_mail import Mail, Message
 from AlertWeb.mod_auth.models import User
+from AlertWeb import mail
 from . import mod_main
 
 
@@ -33,6 +35,17 @@ def contact():
         year=datetime.now().year,
         message='Your contact page.'
     )
+
+@mod_main.route('/testmail')
+def test_mail():
+    """Send's a test email."""
+    msg = Message(app.config['ALERT_WEB_MAIL_SUBJECT_PREFIX'] + "hello",
+                  sender=app.config['MAIL_USERNAME'],
+                  recipients=["deelaws89@gmail.com", "deelaws@hotmail.com"])
+    msg.body = "testing"
+    mail.send(msg)
+    flash('Successfully sent test mail')
+    return redirect(url_for('mod_main.home'))
 
 @mod_main.route('/about')
 @login_required
