@@ -1,14 +1,20 @@
 """
 The flask application package.
 """
-import os
+import os, sys
 from flask import Flask, g, session
 from flask_login import LoginManager
 from flask_mail import Mail, Message
 
 from flask_sqlalchemy import SQLAlchemy
 from AlertWeb.config import configuration
+from sqlalchemy import engine_from_config, create_engine
+from sqlalchemy.engine import url as sqla_url
 
+from alembic.config import Config as AlembicConfig
+from alembic.script import ScriptDirectory
+from alembic.runtime.migration import MigrationContext
+from alembic.runtime.environment import EnvironmentContext
 
 mail = Mail()
 db = SQLAlchemy()
@@ -17,6 +23,39 @@ login_manager = LoginManager()
 login_manager.login_message = 'Successful login'
 login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Please log in #todo localization'
+
+'''
+Programattically performs database migration.
+'''
+def perform_migratons(config_name):
+    ''' If fails, then we should revert to previous version of SLUG running on Heroku
+        link: http://stackoverflow.com/questions/24622170/using-alembic-api-from-inside-application-code
+    '''
+    db_url = configuration[config_name].SQLALCHEMY_DATABASE_URI
+    alembic_config = AlembicConfig('.\\AlertWeb\\alembic.ini')
+    print(alembic_config.get_main_option('sqlalchemy.url'))
+    alembic_config.set_main_option('sqlalchemy.url', db_url)
+    alembic_config.set_main_option('script_location', '.\\AlertWeb\\migrations')
+
+    script_dir = ScriptDirectory.from_config(alembic_config)
+
+    # Facade for migration context.
+    env_cxt = EnvironmentContext(alembic_config, 
+                                 script_dir,
+                                 as_sql=False) # online/offline mode
+
+    # create connecton
+    engine = create_engine(db_url)
+    connection = engine.connect()
+    durl = sqla_url.make_url(db_url)
+    
+    mgrt_cxt = MigrationContext.configure(connection)
+    '''mgrt_cxt = MigrationContext(environment_context=env_cxt,
+                                connection=connection,
+                                dialect=durl.get_dialect()(),
+                                opts=None
+                                )'''
+    print(mgrt_cxt.get_current_revision())
 
 def create_app(config_name):
     app = Flask(__name__)
