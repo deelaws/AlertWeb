@@ -1,3 +1,8 @@
-Alembic error for "cannot start process*" on windows:
-
+#Alembic error for "cannot start process*" on windows:
 http://stackoverflow.com/questions/34057783/alembic-failed-to-create-process-in-windows7/35275384
+
+# Supporting meta data for multiple models in alembic
+http://liuhongjiang.github.io/hexotech/2015/10/14/alembic-support-multiple-model-files/
+
+# Auto-generate migration
+alembic revision --autogenerate  -m "comment"

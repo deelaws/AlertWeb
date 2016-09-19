@@ -1,7 +1,21 @@
 from __future__ import with_statement
+
+'''
+Modules are located a directory up.
+Add it to your system path to access it.
+'''
+import sys,site
+site.addsitedir(sys.path[0]+'\\..\\..')  
+print (sys.path)  # just verify it is there  
+
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
+
+from AlertWeb.config import configuration
+from os import environ
+from AlertWeb.models import Base
+from AlertWeb.mod_rescue.models import RescueAlert
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -15,7 +29,11 @@ fileConfig(config.config_file_name)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = RescueAlert.metadata
+
+config_type = environ.get('CONFIG_TYPE', 'development')
+print("Using config type {}".format(config_type))
+config.set_main_option('sqlalchemy.url', configuration[config_type].SQLALCHEMY_DATABASE_URI)
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

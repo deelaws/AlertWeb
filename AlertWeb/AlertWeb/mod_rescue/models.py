@@ -39,8 +39,9 @@ class RescueAlert(Base):
 
     '''
     If public then, anyone can view the rescue alert
+    Usable for sharing your Alert with your friends and public.
     '''
-    # is_public = db.Column(db.Boolean, default=False)
+    is_public = db.Column(db.Boolean, default=False)
 
     # TODO: Rescuers
 
