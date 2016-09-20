@@ -15,7 +15,7 @@ sys.path.insert(1, '.')
 from AlertWeb import *
 
 # performs migrations from current revision to head
-perform_migratons()
+#perform_migratons()
 
 app = create_app(os.environ.get('CONFIG_TYPE', 'production'))
 
