@@ -5,4 +5,7 @@ http://stackoverflow.com/questions/34057783/alembic-failed-to-create-process-in-
 http://liuhongjiang.github.io/hexotech/2015/10/14/alembic-support-multiple-model-files/
 
 # Auto-generate migration
-alembic revision --autogenerate  -m "comment"
+>>> alembic revision --autogenerate  -m "comment"
+
+# Alembic performing migraton: upgrade
+>>> alembic upgrade head

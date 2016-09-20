@@ -24,6 +24,21 @@ login_manager.login_message = 'Successful login'
 login_manager.login_view = 'auth.login'
 login_manager.login_message = 'Please log in #todo localization'
 
+
+def get_current_revision(db_url):
+    # create connecton
+    engine = create_engine(db_url)
+    connection = engine.connect()
+    durl = sqla_url.make_url(db_url)
+    
+    mgrt_cxt = MigrationContext.configure(connection)
+    #mgrt_cxt = MigrationContext(environment_context=env_cxt,
+                                #connection=connection,
+                                #dialect=durl.get_dialect()(),
+                               # opts=None
+                              #  )#
+    mgrt_cxt.get_current_revision()
+
 '''
 Programattically performs database migration.
 '''
@@ -33,29 +48,30 @@ def perform_migratons(config_name):
     '''
     db_url = configuration[config_name].SQLALCHEMY_DATABASE_URI
     alembic_config = AlembicConfig('.\\AlertWeb\\alembic.ini')
-    print(alembic_config.get_main_option('sqlalchemy.url'))
+
     alembic_config.set_main_option('sqlalchemy.url', db_url)
     alembic_config.set_main_option('script_location', '.\\AlertWeb\\migrations')
 
     script_dir = ScriptDirectory.from_config(alembic_config)
+    head_revision = script_dir.get_current_head()
 
-    # Facade for migration context.
-    env_cxt = EnvironmentContext(alembic_config, 
-                                 script_dir,
-                                 as_sql=False) # online/offline mode
-
-    # create connecton
-    engine = create_engine(db_url)
-    connection = engine.connect()
-    durl = sqla_url.make_url(db_url)
+    current_revision = get_current_revision(db_url)
     
-    mgrt_cxt = MigrationContext.configure(connection)
-    '''mgrt_cxt = MigrationContext(environment_context=env_cxt,
-                                connection=connection,
-                                dialect=durl.get_dialect()(),
-                                opts=None
-                                )'''
-    print(mgrt_cxt.get_current_revision())
+    def upgrade(rev, context):
+        print(rev)
+        return script_dir._upgrade_revs(head_revision, rev)
+
+    #script_dir.
+    # Facade for migration context.
+    with EnvironmentContext(alembic_config, 
+                            script_dir,
+                            as_sql=False,
+                            fn=upgrade,
+                            starting_rev=current_revision,
+                            destination_rev=head_revision,
+                            tag=None
+    ):
+        script_dir.run_env()
 
 def create_app(config_name):
     app = Flask(__name__)
