@@ -5,7 +5,12 @@ Modules are located a directory up.
 Add it to your system path to access it.
 '''
 import sys,site
+# this works for windows to add parent dir to path
 site.addsitedir(sys.path[0]+'\\..\\..')  
+
+# add path to dir for non-windows
+sys.path.insert(0, '../')
+
 print (sys.path)  # just verify it is there  
 
 from alembic import context
