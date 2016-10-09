@@ -1,0 +1,5 @@
+heroku run env --app trailbuddi
+
+heroku python --app trailbuddi
+
+heroku run bash

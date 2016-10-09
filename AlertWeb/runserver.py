@@ -14,5 +14,3 @@ if __name__ == '__main__':
 
     app = create_app(environ.get('CONFIG_TYPE', 'development'))
     app.run(HOST, PORT)
-    
-

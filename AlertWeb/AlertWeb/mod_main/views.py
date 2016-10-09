@@ -11,8 +11,6 @@ from AlertWeb.mod_auth.models import User
 from AlertWeb import mail
 from . import mod_main
 
-
-
 @mod_main.route('/')
 @mod_main.route('/home')
 def home():

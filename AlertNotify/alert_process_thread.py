@@ -1,15 +1,15 @@
 '''
-MyWebsite module is in a different directory.
+AlertWeb module is in a different directory.
 Add it to your system path to access it.
 '''
 import sys,site
-site.addsitedir(sys.path[0]+'\\..\\MyWebsite')  
+site.addsitedir(sys.path[0]+'\\..\\AlertWeb')  
 print (sys.path)  # just verify it is there  
 
 from sqlalchemy import create_engine, asc
 from sqlalchemy.orm import sessionmaker
-from MyWebsite.mod_auth.models import User
-from MyWebsite.mod_rescue.models import RescueAlert
+from AlertWeb.mod_auth.models import User
+from AlertWeb.mod_rescue.models import RescueAlert
 from datetime import datetime, timedelta
 from threading import Thread, Lock, Event, current_thread
 from time import sleep
